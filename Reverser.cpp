@@ -1,30 +1,31 @@
 #include "Reverser.h"
 
 int Reverser::reverseDigit(int value) {
-    if (value < 0) {
+    if (value < 0)
         return -1;
-    } else if (value < 10) {
+    else if (value < 10)
         return value;
-    } else {
-        int lastDigit = value % 10;
-        int remainingDigits = value / 10;
-        int reversed = reverseDigit(remainingDigits);
-        return (lastDigit * pow(10, std::to_string(remainingDigits).length())) + reversed;
-    }
+    else
+        return (value % 10) * power(10, digits(value) - 1) + reverseDigit(value / 10);
 }
 
-std::string Reverser::reverseString(const std::string& characters) {
-    if (characters.empty()) {
+std::string Reverser::reverseString(std::string characters) {
+    if (characters.empty())
         return "";
-    } else if (characters.length() == 1) {
-        return characters;
-    } else {
-        char firstChar = characters[0];
-        std::string remainingChars = characters.substr(1);
-        std::string reversedRemainingChars = reverseString(remainingChars);
-        if (reversedRemainingChars == "ERROR") {
-            return "ERROR";
-        }
-        return reversedRemainingChars + firstChar;
-    }
+    else
+        return reverseString(characters.substr(1)) + characters[0];
+}
+
+int Reverser::power(int base, int exponent) {
+    if (exponent == 0)
+        return 1;
+    else
+        return base * power(base, exponent - 1);
+}
+
+int Reverser::digits(int num) {
+    if (num < 10)
+        return 1;
+    else
+        return 1 + digits(num / 10);
 }
