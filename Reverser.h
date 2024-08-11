@@ -6,7 +6,11 @@
 class Reverser {
 public:
     int reverseDigit(int value);
-    std::string reverseString(const std::string& characters);
+    std::string reverseString(std::string characters);
+
+private:
+    int power(int base, int exponent);
+    int digits(int num);
 };
 
 #endif
